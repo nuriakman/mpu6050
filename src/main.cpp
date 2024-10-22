@@ -4,10 +4,14 @@
 
 MPU6050 mpu;
 
-const char *ssid = "TURKSAT-KABLONET-F5BF-2.4G"; // WiFi SSID
-const char *password = "Akman123.";              // WiFi Şifresi
+// const char *ssid = "TURKSAT-KABLONET-F5BF-2.4G"; // WiFi SSID
+// const char *password = "Akman123.";              // WiFi Şifresi
 
-const char *host = "192.168.0.27"; // Sunucu adresi
+// const char *ssid = "TURKSAT-KABLONET-5G-7N4I";
+const char *ssid = "TURKSAT-KABLONET-2.4G-IGy2";
+const char *password = "ENo2BWI5q3Pd";
+
+const char *host = "192.168.0.18"; // Sunucu adresi
 const int httpPort = 80;           // HTTP için port numarası
 
 int count = 0;               // Okuma sayısı
@@ -72,14 +76,15 @@ void sendData()
                       "&temp=" + prepareData(tempData);
 
     // HTTP POST isteğini gönder
-    client.print(String("POST /6050post.php HTTP/1.1\r\n") +
+    client.print(String("POST /mpu6050/php/6050post.php HTTP/1.1\r\n") +
                  "Host: " + host + "\r\n" +
                  "Content-Type: application/x-www-form-urlencoded\r\n" +
                  "Content-Length: " + postData.length() + "\r\n" +
                  "Connection: close\r\n\r\n" +
                  postData);
 
-    Serial.println("POST isteği gönderildi: " + postData);
+    // Serial.println("POST isteği gönderildi: " + postData);
+    Serial.println("POST isteği gönderildi.");
 
     // Sunucudan gelen yanıtı oku
     while (client.connected() || client.available())
@@ -148,6 +153,10 @@ void loop()
   // Sıcaklık verisini al
   tempRaw = mpu.getTemperature();
   temperature = (tempRaw / 340.0) + 36.53; // MPU6050 sıcaklık hesaplaması
+
+  char buffer[200]; // Verileri tutmak için bir buffer
+  sprintf(buffer, "Okunan Veriler: ax: %d ay: %d az: %d gx: %d gy: %d gz: %d temp: %.2f", ax, ay, az, gx, gy, gz, temperature);
+  Serial.println(buffer);
 
   // Verileri dizilere kaydet
   axData[count] = ax;
