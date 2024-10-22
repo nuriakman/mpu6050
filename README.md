@@ -513,7 +513,7 @@ void loop()
     Serial.println("Bağlantı başarılı!");
 
     // GET isteği için verileri hazırla
-    String url = "/6050.php?ax=" + String(ax) + "&ay=" + String(ay) + "&az=" + String(az) +
+    String url = "/6050get.php?ax=" + String(ax) + "&ay=" + String(ay) + "&az=" + String(az) +
                  "&gx=" + String(gx) + "&gy=" + String(gy) + "&gz=" + String(gz) +
                  "&temp=" + String(temperature); // Sıcaklık verisi GET parametrelerine eklendi
 
