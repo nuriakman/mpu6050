@@ -65,7 +65,7 @@ void cleanup()
 }
 ```
 
-## Bellek dolana kadar dizileri doldurmaya devam et ve her saniye okunan veri adedini, ve dolu/boş bellek miktarını ekrana yazdır.
+## Bellek dolana kadar dizileri doldurmaya devam et ve her saniye okunan veri adedini, ve dolu/boş bellek miktarını ekrana yazdır
 
 ```cpp
 // #include <Arduino.h>
